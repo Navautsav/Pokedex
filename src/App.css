@@ -1,0 +1,69 @@
+.App {
+  text-align: center;
+}
+
+.App {
+  background-image: url('Image.jpg'); 
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; 
+  padding: 20px; 
+}
+
+
+
+.search {
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+}
+.card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
