@@ -3,9 +3,11 @@ import './App.css';
 import PokemonCard from './Components/pokemoncard';
 import { pokemons } from './Components/pokemondata';
 
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredPokemons, setFilteredPokemons] = useState(pokemons);
+  const [selectedType, setSelectedType] = useState('');
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -19,6 +21,30 @@ const App = () => {
   const resetSearch = () => {
     setSearchTerm('');
     setFilteredPokemons(pokemons);
+    setSelectedType('');
+  };
+
+  const handleSortByType = (type) => {
+    if (type === selectedType) {
+      setSelectedType('');
+      setFilteredPokemons(pokemons);
+    } else {
+      setSelectedType(type);
+      const filtered = pokemons.filter(pokemon => pokemon.type === type);
+      setFilteredPokemons(filtered);
+    }
+  };
+
+  const renderSortOptions = () => {
+    const types = [...new Set(pokemons.map(pokemon => pokemon.type))];
+    return (
+      <div className="sort-options">
+        <button onClick={() => handleSortByType('')}>All</button>
+        {types.map((type, index) => (
+          <button key={index} onClick={() => handleSortByType(type)}>{type}</button>
+        ))}
+      </div>
+    );
   };
 
   const renderPokemons = () => {
@@ -39,6 +65,7 @@ const App = () => {
         />
         <button onClick={resetSearch}>Reset</button>
       </div>
+      {renderSortOptions()}
       <div className="cards">
         {renderPokemons()}
       </div>
